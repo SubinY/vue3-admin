@@ -56,7 +56,7 @@ export default {
       try {
         loading.value = true
         await UserModel.getToken(username, password, captcha, tag)
-        await getInformation()
+        // await getInformation()
         loading.value = false
         router.push(Config.defaultRoute)
         ElMessage({
@@ -86,6 +86,7 @@ export default {
       try {
         // 尝试获取当前用户信息
         const user = await UserModel.getPermissions()
+        await UserModel.getPermissionsById()
         store.dispatch('setUserAndState', user)
         store.commit('SET_USER_PERMISSIONS', user.permissions)
       } catch (e) {

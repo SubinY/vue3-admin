@@ -65,6 +65,16 @@ export default class User {
   }
 
   /**
+   * 获取指定用户信息和所拥有的权限
+   */
+  static async getPermissionsById() {
+    const info = await get('v1/admin/getAdminInfoById/1')
+    console.log(info, 'iii')
+    const storeUser = store.getters.user === null ? {} : store.getters.user
+    return Object.assign({ ...storeUser }, info)
+  }
+
+  /**
    * 用户修改密码
    * @param {string} newPassword 新密码
    * @param {string} confirmPassword 确认新密码
